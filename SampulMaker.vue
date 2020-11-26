@@ -176,8 +176,8 @@ export default {
                         this.createText(this.stage, this.bitmap, item, item_index)
                         console.log('initialize ' + item_index)
                     });
-
                     isLoaded = img.complete && img.naturalHeight !== 0;
+
                     this.loading = false;
                     this.stage.update();
                     console.log('END initialize sampul maker')
@@ -321,6 +321,11 @@ export default {
             return this.itemsData;
         },
         toDataURL() {
+            //menjadikan alpha=0.3 menjadi alpha=0 pada semua kontainer
+            this.containers.forEach(container=>{
+                container.getChildAt(0).alpha = 0;
+            });
+            this.stage.update();
             return this.stage.toDataURL();
         },
         isLoading() {
